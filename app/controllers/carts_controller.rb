@@ -1,7 +1,8 @@
 class CartsController < ApplicationController
 
   def add
-    byebug
+    Rails.cache.write('city', 'Tokyo')
+    Rails.cache.read('city')
   end
 
 end
