@@ -5,6 +5,6 @@
   <p>価格:<%= item.price %></p>
   <p>説明:<%= item.description %></p>
 
-  <%= link_to '購入する', items_purchase_path(item) %>
+  <%= link_to 'カートに入れる', item_add_to_cart_path(item) %>
   <p>================</p>
 <% end %>
