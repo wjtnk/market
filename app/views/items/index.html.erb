@@ -4,5 +4,7 @@
   <p>商品名:<%= item.name %></p>
   <p>価格:<%= item.price %></p>
   <p>説明:<%= item.description %></p>
+
+  <%= link_to '購入する', items_buy_path(item) %>
   <p>================</p>
 <% end %>
