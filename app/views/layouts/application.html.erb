@@ -12,18 +12,22 @@
   <body>
 
     <% if user_signed_in? %>
-      <strong><%= link_to current_user.username, pages_show_path %></strong>
+
       <%= link_to 'プロフィール変更', edit_user_registration_path %>
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-      <p>こんにちは、ログインしているUser</p>
+      <p>こんにちは、<%= current_user.email %>さん</p>
+
     <% else %>
+
       <p>こんにちは、ログインしていないUser</p>
       <%= link_to 'サインアップ', new_user_registration_path %>
       <%= link_to 'ログイン', new_user_session_path %>
+
     <% end %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+
   </body>
 </html>
