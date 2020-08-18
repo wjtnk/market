@@ -2,8 +2,9 @@
 <p>--------------------</p>
 
 <% @items.each do |item_id, count| %>
-  <p>価格:<%= Item.find(item_id).name %></p>
-  <p>価格:<%= Item.find(item_id).price %></p>
+  <% item = get_item(item_id) %>
+  <p>商品名:<%= item.name %></p>
+  <p>価格:<%= item.price %></p>
   <p>個数:<%= count %></p>
   <p>================</p>
 <% end %>
