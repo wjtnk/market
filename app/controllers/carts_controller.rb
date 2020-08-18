@@ -7,6 +7,7 @@ class CartsController < ApplicationController
 
   def add
     Item.add_item(current_user.id, params[:item_id])
+    flash[:notice] = "カートに商品を追加しました!!"
     redirect_back(fallback_location: root_path)
   end
 
