@@ -1,15 +1,13 @@
 class CartsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @items = Item.get_item(current_user.id)
+  end
+
   def add
-    Cart.add_item(current_user.id, params[:item_id])
-    #
-    # puts "###########################"
-    # puts Rails.cache.read(current_user.id)
-    # puts "###########################"
-
+    Item.add_item(current_user.id, params[:item_id])
     redirect_back(fallback_location: root_path)
-
   end
 
 end
