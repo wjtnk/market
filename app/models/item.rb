@@ -1,14 +1,9 @@
 class Item < ApplicationRecord
 
   # キャッシュからItemを取得
-  def self.get_item(user_id)
+  def self.get_item_info(user_id)
     cart = Rails.cache.read(user_id)
-
-    if cart.blank?
-      return
-    end
-
-    Item.where(id: cart[:items])
+    return cart.blank? ? [] : Item.where(id: cart[:items]), cart.blank? ? 0 : cart[:total_price]
   end
 
   # キャッシュにitemを追加
