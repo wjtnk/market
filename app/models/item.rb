@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   # キャッシュからItemを取得
   # user_idをkeyとして、{itemのid => itemの個数}
   # e.g){ 1 => 500, 2 => 100, 3 =>10} の時、itemのidが1のものが500個、itemのidが2のものが100個、itemのidが3のもの10個
-  def self.get_item_info(user_id)
+  def self.get_items(user_id)
     items = Rails.cache.read(user_id)
     return items.blank? ? [] : items
   end

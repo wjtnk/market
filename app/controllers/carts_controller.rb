@@ -2,7 +2,7 @@ class CartsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @items = Item.get_item_info(current_user.id)
+    @items = Item.get_items(current_user.id)
   end
 
   def add
