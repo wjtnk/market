@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_134055) do
+ActiveRecord::Schema.define(version: 2020_08_18_145312) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
@@ -23,13 +23,23 @@ ActiveRecord::Schema.define(version: 2020_08_17_134055) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "purchase_histories", force: :cascade do |t|
+  create_table "orders", force: :cascade do |t|
+    t.integer "cash_on_delivery_fee"
+    t.integer "delivery_fee"
+    t.integer "total_price"
     t.integer "user_id"
-    t.integer "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_purchase_histories_on_item_id"
-    t.index ["user_id"], name: "index_purchase_histories_on_user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "purchase_items", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_purchase_items_on_item_id"
+    t.index ["order_id"], name: "index_purchase_items_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
