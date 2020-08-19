@@ -1,1 +1,11 @@
 <h1>購入する</h1>
+<p>合計商品個数:<%= get_item_count(@items)%> </p>
+<p>--------------------</p>
+
+<% @items.each do |item_id, count| %>
+  <% item = get_item(item_id) %>
+  <p>商品名:<%= item.name %></p>
+  <p>価格:<%= item.price %></p>
+  <p>個数:<%= count %></p>
+  <p>================</p>
+<% end %>
