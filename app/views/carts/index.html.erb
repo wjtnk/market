@@ -1,5 +1,6 @@
 <h1>カート一覧</h1>
 <p>--------------------</p>
+<%= link_to '購入に進む', new_order_path %>
 
 <% @items.each do |item_id, count| %>
   <% item = get_item(item_id) %>

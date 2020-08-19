@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root to:'items#index'
   get  "items/:item_id/add_to_cart" , to: "carts#add" , as: 'item_add_to_cart'
   resources :carts, only: [:index]
+  resources :orders, only: [:new, :create]
 end
