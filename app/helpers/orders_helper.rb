@@ -24,12 +24,25 @@ module OrdersHelper
     item_total_price
   end
 
+  #代引き手数料算出
   def get_cash_on_delivery_fee(items)
-    999
+    item_total_price = get_item_total_price(items)
+    if 0 <= item_total_price && item_total_price < 10000
+      300
+    elsif 10000 <= item_total_price && item_total_price < 30000
+      400
+    elsif 30000 <= item_total_price && item_total_price < 100000
+      600
+    elsif 100000 < item_total_price
+      1000
+    else
+      0
+    end
   end
 
+  # 商品の税込み合計金額
   def get_order_total_price(items)
-    999
+    get_delivery_fee(items) + get_item_total_price(items) + get_cash_on_delivery_fee(items) * 1.08
   end
 
 end
