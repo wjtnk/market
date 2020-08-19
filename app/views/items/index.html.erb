@@ -1,7 +1,5 @@
 <h1>商品一覧</h1>
 
-<p><%= flash[:notice] %></p>
-
 <% @items.each do |item| %>
   <p>商品名:<%= item.name %></p>
   <p>価格:<%= item.price %></p>
