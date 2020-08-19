@@ -9,6 +9,18 @@ class Order < ApplicationRecord
     count
   end
 
+  # 注文作成に必要な金額をそれぞれ返す
+  # return 商品の合計数,送料,代引き手数料,商品合計金額
+  def self.get_order_each_prices(items, item_count)
+    item_total_price = self.get_item_total_price(items)
+    delivery_fee = self.get_delivery_fee(item_count)
+    cash_on_delivery_fee = self.get_cash_on_delivery_fee(item_total_price)
+    order_total_price = self.get_order_total_price(item_total_price, delivery_fee, cash_on_delivery_fee)
+    return item_total_price, delivery_fee, cash_on_delivery_fee, order_total_price
+  end
+
+  private
+
   #商品合計金額
   def self.get_item_total_price(items)
     item_total_price = 0
@@ -42,16 +54,5 @@ class Order < ApplicationRecord
   def self.get_order_total_price(item_total_price, delivery_fee, cash_on_delivery_fee)
     item_total_price + delivery_fee + cash_on_delivery_fee * 1.08
   end
-
-  # 注文作成に必要な金額をそれぞれ返す
-  # return 商品の合計数,送料,代引き手数料,商品合計金額
-  def self.get_order_each_prices(items, item_count)
-    item_total_price = self.get_item_total_price(items)
-    delivery_fee = self.get_delivery_fee(item_count)
-    cash_on_delivery_fee = self.get_cash_on_delivery_fee(item_total_price)
-    order_total_price = self.get_order_total_price(item_total_price, delivery_fee, cash_on_delivery_fee)
-    return item_total_price, delivery_fee, cash_on_delivery_fee, order_total_price
-  end
-
 
 end
