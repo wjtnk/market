@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
 
   has_many :purchase_items, dependent: :destroy
-  belong_to :user
+  belongs_to :user
 
   # 商品の個数を算出する
   def self.get_item_count(items)

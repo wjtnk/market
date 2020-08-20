@@ -1,6 +1,6 @@
 class PurchaseItem < ApplicationRecord
 
-  belong_to :item
-  belong_to :order
+  belongs_to :item
+  belongs_to :order
 
 end

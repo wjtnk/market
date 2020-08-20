@@ -14,27 +14,23 @@ class Item < ApplicationRecord
   # 追加する形式はget_item_infoメソッドを参照
   def self.add_item(user_id, item_id)
     item = Rails.cache.read(user_id)
-
     # itemが何もなかったら新たに配列に書き込み
     if item.blank?
       Rails.cache.write(user_id, {item_id => 1})
       return
     end
-
     # itemが新しいものだったら
     if item[item_id].blank?
       item[item_id] = 1
       Rails.cache.write(user_id, item)
       return
     end
-
     item[item_id] +=  1
     Rails.cache.write(user_id, item)
-
   end
 
   # キャッシュからItemを削除
-  def self.remove(user_id, item_id)
+  def self.remove_item(user_id, item_id)
     item = Rails.cache.read(user_id)
     item[item_id] -=  1
     # 0以下になればhashから削除
@@ -47,14 +43,12 @@ class Item < ApplicationRecord
     items = self.get_items(user_id)
     item_count = Order.get_item_count(items)
     item_total_price, delivery_fee, cash_on_delivery_fee, order_total_price = Order.get_order_each_prices(items, item_count)
-
     order = Order.create!(
         delivery_fee: delivery_fee,
         cash_on_delivery_fee: cash_on_delivery_fee,
         total_price: order_total_price,
         user_id: user_id
     )
-
     items.each do |item_id, count|
       PurchaseItem.create!(
           item_id: item_id,
@@ -62,7 +56,6 @@ class Item < ApplicationRecord
           count: count
       )
     end
-
     # 購入後はキャッシュに入っている商品を削除
     Rails.cache.delete(user_id)
   end
