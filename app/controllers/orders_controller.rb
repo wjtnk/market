@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
   # キャッシュに保存している商品を購入
   def create
     Item.purchase(current_user.id)
-    flash[:notice] = "購入ありがとうございます"
+    flash[:notice] = "購入ありがとうございます!!"
     redirect_to root_path
   end
 
