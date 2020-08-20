@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   get  "items/:item_id/add" , to: "carts#add" , as: 'item_add_to_cart'
   get  "items/:item_id/remove" , to: "carts#remove" , as: 'item_remove_from_cart'
   resources :carts, only: [:index]
-  resources :orders, only: [:new, :create]
+  resources :orders, only: [:index, :new, :create]
 end
