@@ -39,7 +39,7 @@ class Item < ApplicationRecord
   end
 
   # 商品を購入
-  def self.purchase(user_id)
+  def self.purchase(user_id, address, deliver_time)
     items = self.get_items(user_id)
     item_count = Order.get_item_count(items)
     item_total_price, delivery_fee, cash_on_delivery_fee, order_total_price = Order.get_order_each_prices(items, item_count)
@@ -47,6 +47,8 @@ class Item < ApplicationRecord
         delivery_fee: delivery_fee,
         cash_on_delivery_fee: cash_on_delivery_fee,
         total_price: order_total_price,
+        address: address,
+        deliver_time: deliver_time,
         user_id: user_id
     )
     items.each do |item_id, count|
