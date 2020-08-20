@@ -6,6 +6,8 @@ class Order < ApplicationRecord
   # 商品の個数を算出する
   def self.get_item_count(items)
     count = 0
+    #itemが[]なら0を返却
+    return 0 if items.blank?
     items.values.each do |item|
       count += item
     end
