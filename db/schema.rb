@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_145312) do
     t.string "image"
     t.integer "price"
     t.string "description"
-    t.boolean "is_display", default: true
+    t.boolean "is_hidden", default: false
     t.integer "display_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

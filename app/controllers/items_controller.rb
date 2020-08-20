@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   
   def index
-    @items = Item.where(is_display: true).order(:display_order)
+    @items = Item.where(is_hidden: false).order(:display_order)
   end
 
 end

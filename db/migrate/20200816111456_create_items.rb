@@ -5,7 +5,7 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.string :image
       t.integer :price
       t.string :description
-      t.boolean :is_display, default: true
+      t.boolean :is_hidden, default: false
       t.integer :display_order
 
       t.timestamps
