@@ -32,10 +32,15 @@
   <p>お支払い合計金額(×税8%):<%= @order_total_price %>円</p>
 
   <h2>配送先情報</h2>
-  <p>配送先住所:<%= current_user.default_address %></p>
-  <p>配送時間帯:<%= get_deliver_time(current_user.default_deliver_time) %>時</p>
 
   <%= form_with url: orders_path do |f| %>
+
+    <%= f.label :address ,'・送付先住所' %><br />
+    <%= f.text_field :address , value: current_user.default_address %><br />
+
+    <%= f.label :deliver_time, '・希望配送時間帯' %><br />
+    <%= f.select :deliver_time, {'8-12': 1, '12-14': 2,'14-16': 3, '16-18': 4, '18-20': 5, '20-21': 6}, :selected=>current_user.default_deliver_time %><br />
+
     <%= f.submit "購入する" %>
   <% end %>
 
