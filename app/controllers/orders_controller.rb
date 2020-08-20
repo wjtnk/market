@@ -27,6 +27,9 @@ class OrdersController < ApplicationController
       )
     end
 
+    # 購入後はキャッシュに入っている商品を削除
+    Rails.cache.delete(current_user.id)
+
     flash[:notice] = "購入ありがとうございます"
     redirect_to root_path
   end
