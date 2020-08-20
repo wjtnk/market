@@ -27,13 +27,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :address ,'住所' %><br />
+    <%= f.label :address ,'送付先住所' %><br />
     <%= f.text_field :address %>
   </div>
 
   <div class="field">
-    <%= f.label :deliver_time, '配送時間帯' %><br />
-    <%= f.select :deliver_time, {'8-12': 1, '12-14': 2,'14-16': 3, '16-18': 4, '18-20': 5, '20-21': 6}, { include_blank: '選択してください'} %>
+    <%= f.label :deliver_time, '希望配送時間帯' %><br />
+    <%= f.select :deliver_time, {'8-12': 1, '12-14': 2,'14-16': 3, '16-18': 4, '18-20': 5, '20-21': 6} %>
   </div>
 
   <div class="actions">

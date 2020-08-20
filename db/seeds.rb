@@ -10,8 +10,9 @@ User.create!(
         {
             email: 'sample@sample.com',
             password: 'password',
-            name: 'ren',
-            address: '新宿区西新宿2-8-1'
+            name: 'sample太郎',
+            address: '新宿区西新宿2-8-1',
+            deliver_time: 1
         },
     ]
 )
