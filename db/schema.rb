@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_145312) do
     t.integer "delivery_fee"
     t.integer "cash_on_delivery_fee"
     t.integer "total_price"
-    t.integer "address"
+    t.string "address"
     t.integer "deliver_time"
     t.integer "user_id"
     t.datetime "created_at", null: false
