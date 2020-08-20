@@ -33,8 +33,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       # t.datetime :locked_at
 
       t.string :name
-      t.string :address
-      t.integer :deliver_time, defalut: 0
+      t.string :default_address
+      t.integer :default_deliver_time, default: 0
 
       t.timestamps null: false
     end

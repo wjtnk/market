@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 2020_08_18_145312) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
-    t.string "address"
-    t.integer "deliver_time"
+    t.string "default_address"
+    t.integer "default_deliver_time", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

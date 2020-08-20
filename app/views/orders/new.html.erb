@@ -32,8 +32,8 @@
   <p>お支払い合計金額(×税8%):<%= @order_total_price %>円</p>
 
   <h2>配送先情報</h2>
-  <p>配送先住所:<%= current_user.address %></p>
-  <p>配送時間帯:<%= get_deliver_time(current_user.deliver_time) %>時</p>
+  <p>配送先住所:<%= current_user.default_address %></p>
+  <p>配送時間帯:<%= get_deliver_time(current_user.default_deliver_time) %>時</p>
 
   <%= form_with url: orders_path do |f| %>
     <%= f.submit "購入する" %>

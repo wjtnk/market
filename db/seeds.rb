@@ -11,8 +11,8 @@ User.create!(
             email: 'sample@sample.com',
             password: 'password',
             name: 'sample太郎',
-            address: '新宿区西新宿2-8-1',
-            deliver_time: 1
+            default_address: '新宿区西新宿2-8-1',
+            default_deliver_time: 1
         },
     ]
 )

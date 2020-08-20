@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   # deviseで追加でUserテーブルに入れたいカラム
   def configure_permitted_parameters
-    added_attrs = [:name, :address, :deliver_time]
+    added_attrs = [:name, :default_address, :default_deliver_time]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
   end
 
