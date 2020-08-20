@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2020_08_18_145312) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "cash_on_delivery_fee"
     t.integer "delivery_fee"
+    t.integer "cash_on_delivery_fee"
     t.integer "total_price"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_145312) do
   create_table "purchase_items", force: :cascade do |t|
     t.integer "item_id"
     t.integer "order_id"
+    t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_purchase_items_on_item_id"
