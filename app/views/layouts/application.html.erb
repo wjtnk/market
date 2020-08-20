@@ -18,14 +18,14 @@
       <%= link_to 'プロフィール変更', edit_user_registration_path %>
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
       <%= link_to 'カート一覧', carts_path %>
-      <%= link_to '購入した商品', orders_path %>
-      <p>こんにちは、<%= current_user.email %>さん</p>
+      <%= link_to '購入履歴', orders_path %>
+      <p>こんにちは!!<%= current_user.name %>さん</p>
 
     <% else %>
 
       <%= link_to 'サインアップ', new_user_registration_path %>
       <%= link_to 'ログイン', new_user_session_path %>
-      <p>こんにちは、ログインしていないUser</p>
+      <p>商品購入するにはログインしてください</p>
 
     <% end %>
 

@@ -1,10 +1,10 @@
-<h1>購入した商品一覧</h1>
+<h1>購入履歴</h1>
 <p>======================================================================</p>
 
 <% @orders.each do |order| %>
   <% order.purchase_items.each do |purchase_item| %>
     <p>商品名:<%= purchase_item.item.name %>(価格:<%= purchase_item.item.price %>円, 個数:<%= purchase_item.count %>)</p>
-    <p style="color: blue">--------------------------------</p>
+    <p style="color: blue">--------------------------------------------------------------------------------------------------------------------------------</p>
   <% end %>
   <p>注文ID:<%= order.id %></p>
   <p>送料:<%= order.delivery_fee %>円</p>
