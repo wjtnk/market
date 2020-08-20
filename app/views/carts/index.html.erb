@@ -1,5 +1,9 @@
 <h1>カート一覧</h1>
-<%= link_to '購入に進む', new_order_path %>
+<% if @items.blank? %>
+  <p>購入する商品はありません</p>
+<% else %>
+  <%= link_to '購入に進む', new_order_path %>
+<% end %>
 <p>--------------------</p>
 
 <% @items.each do |item_id, count| %>

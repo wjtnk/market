@@ -3,6 +3,7 @@ class CartsController < ApplicationController
 
   def index
     @items = Item.get_items(current_user.id)
+    byebug
   end
 
   def add
