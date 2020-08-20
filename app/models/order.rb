@@ -57,7 +57,7 @@ class Order < ApplicationRecord
 
   # 商品の税込み合計金額
   def self.get_order_total_price(item_total_price, delivery_fee, cash_on_delivery_fee)
-    (item_total_price + delivery_fee + cash_on_delivery_fee * 1.08).floor
+    ((item_total_price + delivery_fee + cash_on_delivery_fee) * 1.08).floor
   end
 
 end

@@ -1,5 +1,9 @@
 class OrdersController < ApplicationController
 
+  def index
+    @orders = Order.where(user_id: 1)
+  end
+
   def new
     @items = Item.get_items(current_user.id)
     @item_count = Order.get_item_count(@items)
