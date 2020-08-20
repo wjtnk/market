@@ -23,7 +23,7 @@ Item.create!(
             image: 'sample1.png',
             price: 1000,
             description: 'サンプルItem1の説明文',
-            is_display: 1,
+            is_hidden: false,
             display_order: 1
         },
         {
@@ -31,7 +31,7 @@ Item.create!(
             image: 'sample2.png',
             price: 2000,
             description: 'サンプルItem2の説明文',
-            is_display: 1,
+            is_hidden: false,
             display_order: 2
         },
         {
@@ -39,8 +39,16 @@ Item.create!(
             image: 'sample1.png',
             price: 3000,
             description: 'サンプルItem3の説明文',
-            is_display: 1,
+            is_hidden: false,
             display_order: 3
+        },
+        {
+            name: 'サンプルItem4',
+            image: 'sample4.png',
+            price: 4000,
+            description: 'サンプルItem4の説明文',
+            is_hidden: true,
+            display_order: 4
         }
     ]
 )
