@@ -33,6 +33,15 @@ class Item < ApplicationRecord
 
   end
 
+  # キャッシュからItemを削除
+  def self.remove(user_id, item_id)
+    item = Rails.cache.read(user_id)
+    item[item_id] -=  1
+    # 0以下になればhashから削除
+    item.delete(item_id) if item[item_id] <= 0
+    Rails.cache.write(user_id, item)
+  end
+
   # 商品を購入
   def self.purchase(user_id)
     items = self.get_items(user_id)

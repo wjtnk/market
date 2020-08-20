@@ -7,5 +7,6 @@
   <p>商品名:<%= item.name %></p>
   <p>価格:<%= item.price %></p>
   <p>個数:<%= count %></p>
+  <%= link_to 'カートから商品を削除する', item_remove_from_cart_path(item) %>
   <p>================</p>
 <% end %>
