@@ -10,7 +10,7 @@ class Item < ApplicationRecord
     return items.blank? ? [] : items
   end
 
-  # キャッシュにitemを追加
+  # カート(キャッシュ)にitemを追加
   # 追加する形式はget_item_infoメソッドを参照
   def self.add_item(user_id, item_id)
     item = Rails.cache.read(user_id)
@@ -29,7 +29,7 @@ class Item < ApplicationRecord
     Rails.cache.write(user_id, item)
   end
 
-  # キャッシュからItemを削除
+  # カート(キャッシュ)からItemを削除
   def self.remove_item(user_id, item_id)
     item = Rails.cache.read(user_id)
     item[item_id] -=  1
