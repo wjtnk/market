@@ -22,7 +22,6 @@
         <td><%=item.price * count %>円</td>
         <td><%= link_to 'カートから商品を削除する', item_remove_from_cart_path(item) %></td>
       </tr>
-
     </table>
 
     <p style="color: coral">==========================================================</p>
@@ -31,24 +30,32 @@
 
   <h2>お支払い情報</h2>
 
-  <p>・商品合計金額:<%= @item_total_price %>円</p>
 
-  <p style="color: orange">================================================================================================================</p>
+  <table border="1">
+    <tr>
+      <th>商品合計金額</th>
+      <th>送料</th>
+      <th>合計商品数</th>
+      <th>代引き手数料</th>
+      <td>お支払い合計金額(×税8%)</td>
+    </tr>
+    <tr>
+      <td><%= @item_total_price %>円</td>
+      <td><%= @delivery_fee %>円</td>
+      <td><%= @item_count %>個</td>
+      <td><%= @cash_on_delivery_fee %>円</td>
+      <th><%= @order_total_price %>円</th>
+    </tr>
+  </table>
 
-  <p>・送料:<%= @delivery_fee %>円(合計商品数:<%= @item_count %>)</p>
-  <span style="font-size: 5px">※5商品ごとに600円追加</span><br>
+  <span style="font-size: 5px">※送料:5商品ごとに600円追加</span><br>
 
-  <p style="color: orange">================================================================================================================</p>
-  <p>・代引き手数料:<%= @cash_on_delivery_fee %>円</p>
-  <span style="font-size: 5px">商品合計金額が</span><br>
-  <span style="font-size: 5px">※0-10,000円未満：300円+税</span><br>
-  <span style="font-size: 5px">※0-10,000円未満：300円+税</span><br>
-  <span style="font-size: 5px">※10,000-30,000円未満：400円+税</span><br>
-  <span style="font-size: 5px">※30,000-100,000円未満：600円+税</span><br>
-  <span style="font-size: 5px">※100,000円以上：1,000円+税</span><br>
-  <p style="color: orange">================================================================================================================</p>
-
-  <p>お支払い合計金額(×税8%):<%= @order_total_price %>円</p>
+  <span style="font-size: 5px">※代引き手数料:商品合計金額が</span><br>
+  <span style="font-size: 5px">0-10,000円未満：300円+税</span><br>
+  <span style="font-size: 5px">0-10,000円未満：300円+税</span><br>
+  <span style="font-size: 5px">10,000-30,000円未満：400円+税</span><br>
+  <span style="font-size: 5px">30,000-100,000円未満：600円+税</span><br>
+  <span style="font-size: 5px">100,000円以上：1,000円+税</span><br>
 
   <h2>配送先情報</h2>
 
