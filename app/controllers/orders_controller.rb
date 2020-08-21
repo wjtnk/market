@@ -11,9 +11,9 @@ class OrdersController < ApplicationController
     @item_total_price, @delivery_fee, @cash_on_delivery_fee, @order_total_price = Order.get_order_each_prices(@items, @item_count)
   end
 
-  # キャッシュに保存している商品を購入
+  # カート(キャッシュ)に保存している商品を購入
   def create
-    Item.purchase(current_user.id, params[:address], params[:deliver_time])
+    Order.create_order(current_user.id, params[:address], params[:deliver_time])
     redirect_to orders_path, notice: '購入ありがとうございます!!'
   end
 

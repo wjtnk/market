@@ -24,6 +24,30 @@ class Order < ApplicationRecord
     return item_total_price, delivery_fee, cash_on_delivery_fee, order_total_price
   end
 
+  # 商品を購入
+  def self.create_order(user_id, address, deliver_time)
+    items = Item.get_items(user_id)
+    item_count = self.get_item_count(items)
+    item_total_price, delivery_fee, cash_on_delivery_fee, order_total_price = Order.get_order_each_prices(items, item_count)
+    order = self.create!(
+        delivery_fee: delivery_fee,
+        cash_on_delivery_fee: cash_on_delivery_fee,
+        total_price: order_total_price,
+        address: address,
+        deliver_time: deliver_time,
+        user_id: user_id
+    )
+    items.each do |item_id, count|
+      PurchaseItem.create!(
+          item_id: item_id,
+          order_id: order.id,
+          count: count
+      )
+    end
+    # 購入後はキャッシュに入っている商品を削除
+    Rails.cache.delete(user_id)
+  end
+
   private
 
   #商品合計金額
