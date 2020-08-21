@@ -14,17 +14,17 @@ class Item < ApplicationRecord
   # 追加する形式はget_item_infoメソッドを参照
   def self.add_item(user_id, item_id)
     item = Rails.cache.read(user_id)
-    # itemが何もなかったら新たに配列に書き込み
-    if item.blank?
-      Rails.cache.write(user_id, {item_id => 1})
-      return
-    end
+
+    # itemが何もなかったら新たに配列に書き込んでreturn
+    return Rails.cache.write(user_id, {item_id => 1}) if item.blank?
+
     # itemが新しいものだったら
     if item[item_id].blank?
       item[item_id] = 1
       Rails.cache.write(user_id, item)
       return
     end
+
     item[item_id] +=  1
     Rails.cache.write(user_id, item)
   end
