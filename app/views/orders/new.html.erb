@@ -1,16 +1,35 @@
 <h1>購入する</h1>
 
-<h2>購入情報</h2>
-
 <% if @item_count > 0 %>
 
+  <h2>購入商品</h2>
+
   <% @items.each do |item_id, count| %>
-    <% item = get_item(item_id) %>
-    <p>商品名:<%= item.name %></p>
-    <p>単価:<%= item.price %>円(個数:<%= count %>)</p>
-    <p>合計:<%=item.price * count %>円</p>
-    <p>----------------------------------------------------------------</p>
+
+    <table border="1">
+      <tr>
+        <th>商品名</th>
+        <th>単価</th>
+        <th>合計</th>
+        <th></th>
+      </tr>
+
+      <% item = get_item(item_id) %>
+
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.price %>円(個数:<%= count %>)</td>
+        <td><%=item.price * count %>円</td>
+        <td><%= link_to 'カートから商品を削除する', item_remove_from_cart_path(item) %></td>
+      </tr>
+
+    </table>
+
+    <p style="color: coral">==========================================================</p>
   <% end %>
+
+
+  <h2>お支払い情報</h2>
 
   <p>・商品合計金額:<%= @item_total_price %>円</p>
 
