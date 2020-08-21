@@ -27,6 +27,21 @@
   </div>
 
   <div class="field">
+    <%= f.label :name , '名前' %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :default_address ,'送付先住所' %><br />
+    <%= f.text_field :default_address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :default_deliver_time, '希望配送時間帯' %><br />
+    <%= f.select :default_deliver_time, {'8-12': 1, '12-14': 2,'14-16': 3, '16-18': 4, '18-20': 5, '20-21': 6} %>
+  </div>
+  
+  <div class="field">
     <%= f.label :current_password, '現在のパスワード' %> <i>(変更の際は現在のパスワードを入力する必要があります)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
