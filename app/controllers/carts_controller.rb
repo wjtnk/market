@@ -12,8 +12,7 @@ class CartsController < ApplicationController
 
   def remove
     Item.remove_item(current_user.id, params[:item_id])
-    flash[:notice] = "カートから商品を削除しました!!"
-    redirect_back fallback_location: root_path
+    redirect_back fallback_location: root_path, notice: "カートから商品を削除しました!!"
   end
 
 end
