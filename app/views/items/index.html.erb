@@ -1,10 +1,24 @@
 <h1>商品一覧</h1>
 
 <% @items.each do |item| %>
-  <p>商品名:<%= item.name %></p>
-  <p>価格:<%= item.price %></p>
-  <p>説明:<%= item.description %></p>
 
-  <%= link_to 'カートに入れる', item_add_to_cart_path(item) %>
-  <p>================</p>
+  <table border="1">
+    <tr>
+      <th>商品名</th>
+      <th>価格</th>
+      <th>説明</th>
+      <th></th>
+    </tr>
+
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= item.price %>円</td>
+      <td><%= item.description %></td>
+      <td><%= link_to 'カートに入れる', item_add_to_cart_path(item) %></td>
+    </tr>
+
+  </table>
+
+  <p style="color: coral">==========================================================</p>
 <% end %>
+
