@@ -6,6 +6,9 @@
 
   <% @items.each do |item_id, count| %>
 
+    <% item = get_item(item_id) %>
+    <%= image_tag item.image , width: "300px" %>
+
     <table border="1">
       <tr>
         <th>商品名</th>
@@ -13,9 +16,6 @@
         <th>合計</th>
         <th></th>
       </tr>
-
-      <% item = get_item(item_id) %>
-
       <tr>
         <td><%= item.name %></td>
         <td><%= item.price %>円(個数:<%= count %>)</td>

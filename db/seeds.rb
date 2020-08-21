@@ -21,7 +21,7 @@ Item.create!(
     [
         {
             name: 'サンプルItem1',
-            image: 'sample1.png',
+            image: 'https://www.pakutaso.com/shared/img/thumb/gyudon458A7164_TP_V.jpg',
             price: 1000,
             description: 'サンプルItem1の説明文',
             is_hidden: false,
@@ -29,7 +29,7 @@ Item.create!(
         },
         {
             name: 'サンプルItem2',
-            image: 'sample2.png',
+            image: 'https://www.pakutaso.com/shared/img/thumb/MOK_unitotoro_TP_V.jpg',
             price: 2000,
             description: 'サンプルItem2の説明文',
             is_hidden: false,
@@ -37,7 +37,7 @@ Item.create!(
         },
         {
             name: 'サンプルItem3',
-            image: 'sample1.png',
+            image: 'https://www.pakutaso.com/shared/img/thumb/PP_hotcake_TP_V.jpg',
             price: 3000,
             description: 'サンプルItem3の説明文',
             is_hidden: false,
@@ -45,7 +45,7 @@ Item.create!(
         },
         {
             name: 'サンプルItem4',
-            image: 'sample4.png',
+            image: 'https://www.pakutaso.com/shared/img/thumb/YUKI1211B1142_TP_V.jpg',
             price: 4000,
             description: 'サンプルItem4の説明文',
             is_hidden: true,

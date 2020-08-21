@@ -2,26 +2,25 @@
 
 <% @items.each do |item| %>
 
+  <%= image_tag item.image , width: "300px" %>
+
   <table border="1">
     <tr>
       <th>商品名</th>
       <th>価格</th>
       <th>説明</th>
     </tr>
-
     <tr>
       <td><%= item.name %></td>
       <td><%= item.price %>円</td>
       <td><%= item.description %></td>
-
       <% if user_signed_in? %>
         <td><%= link_to 'カートに入れる', item_add_to_cart_path(item) %></td>
       <% end %>
-
     </tr>
-
   </table>
 
   <p style="color: coral">==========================================================</p>
+
 <% end %>
 
