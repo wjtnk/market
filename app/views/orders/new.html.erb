@@ -14,13 +14,11 @@
         <th>商品名</th>
         <th>単価</th>
         <th>合計</th>
-        <th></th>
       </tr>
       <tr>
         <td><%= item.name %></td>
         <td><%= item.price %>円(個数:<%= count %>)</td>
         <td><%=item.price * count %>円</td>
-        <td><%= link_to 'カートから商品を削除する', item_remove_from_cart_path(item) %></td>
       </tr>
     </table>
 
