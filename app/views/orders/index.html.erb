@@ -6,7 +6,7 @@
   <p>注文ID:<%= order.id %></p>
   <p>注文合計購入金額(税込み):<%= order.total_price %>円(送料:<%= order.delivery_fee %>円,代引き手数料:<%= order.cash_on_delivery_fee %>円)</p>
   <p>お届け先:<%= order.address %></p>
-  <p>購入日:<%= order.created_at %></p>
+  <p>購入日時:<%= order.created_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
 
   <table border="1">
     <tr>
