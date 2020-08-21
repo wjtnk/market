@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
   # キャッシュに保存している商品を購入
   def create
     Item.purchase(current_user.id, params[:address], params[:deliver_time])
-    redirect_to root_path, notice: '購入ありがとうございます!!'
+    redirect_to orders_path, notice: '購入ありがとうございます!!'
   end
 
 end
