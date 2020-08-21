@@ -20,34 +20,34 @@ User.create!(
 Item.create!(
     [
         {
-            name: 'サンプルItem1',
+            name: '牛丼セット(10セット)',
             image: 'https://www.pakutaso.com/shared/img/thumb/gyudon458A7164_TP_V.jpg',
-            price: 1000,
-            description: 'サンプルItem1の説明文',
+            price: 2000,
+            description: '牛丼セット×10セット!!',
             is_hidden: false,
             display_order: 1
         },
         {
-            name: 'サンプルItem2',
+            name: 'お寿司セット(4人前)',
             image: 'https://www.pakutaso.com/shared/img/thumb/MOK_unitotoro_TP_V.jpg',
-            price: 2000,
-            description: 'サンプルItem2の説明文',
+            price: 3000,
+            description: 'お寿司セット4人前です',
             is_hidden: false,
             display_order: 2
         },
         {
-            name: 'サンプルItem3',
+            name: 'ホットケーキ粉(1kg)',
             image: 'https://www.pakutaso.com/shared/img/thumb/PP_hotcake_TP_V.jpg',
-            price: 3000,
-            description: 'サンプルItem3の説明文',
+            price: 500,
+            description: '大容量ホットケーキ粉',
             is_hidden: false,
             display_order: 3
         },
         {
-            name: 'サンプルItem4',
+            name: '冷凍鯛焼き(10個入り)',
             image: 'https://www.pakutaso.com/shared/img/thumb/YUKI1211B1142_TP_V.jpg',
-            price: 4000,
-            description: 'サンプルItem4の説明文',
+            price: 800,
+            description: '冷凍鯛焼き10個入り',
             is_hidden: true,
             display_order: 4
         }
