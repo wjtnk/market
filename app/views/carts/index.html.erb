@@ -17,16 +17,15 @@
       <th>商品名</th>
       <th>価格</th>
       <th>個数</th>
-      <th></th>
     </tr>
     <tr>
       <td><%= item.name %></td>
       <td><%= item.price %>円</td>
       <td><%= count %></td>
-      <td><%= link_to 'カートから商品を削除する', item_remove_from_cart_path(item) %></td>
     </tr>
-
   </table>
+
+  <%= button_to 'カートから商品を削除する', item_remove_from_cart_path(item), method: :delete %>
 
   <p style="color: coral">==========================================================</p>
 
