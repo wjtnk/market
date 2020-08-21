@@ -7,14 +7,17 @@
       <th>商品名</th>
       <th>価格</th>
       <th>説明</th>
-      <th></th>
     </tr>
 
     <tr>
       <td><%= item.name %></td>
       <td><%= item.price %>円</td>
       <td><%= item.description %></td>
-      <td><%= link_to 'カートに入れる', item_add_to_cart_path(item) %></td>
+
+      <% if user_signed_in? %>
+        <td><%= link_to 'カートに入れる', item_add_to_cart_path(item) %></td>
+      <% end %>
+
     </tr>
 
   </table>
