@@ -24,7 +24,7 @@
       </tr>
     </table>
 
-    <p style="color: coral">==========================================================</p>
+    <p style="color: coral">----------------------------------------------------------------------------------------</p>
   <% end %>
 
 
@@ -37,14 +37,14 @@
       <th>送料</th>
       <th>合計商品数</th>
       <th>代引き手数料</th>
-      <td>お支払い合計金額(×税8%)</td>
+      <th>お支払い合計金額(×税8%)</th>
     </tr>
     <tr>
       <td><%= @item_total_price %>円</td>
       <td><%= @delivery_fee %>円</td>
       <td><%= @item_count %>個</td>
       <td><%= @cash_on_delivery_fee %>円</td>
-      <th><%= @order_total_price %>円</th>
+      <td><%= @order_total_price %>円</td>
     </tr>
   </table>
 
@@ -58,13 +58,11 @@
   <span style="font-size: 5px">100,000円以上：1,000円+税</span><br>
 
   <h2>配送先情報</h2>
-
   <%= form_with url: orders_path do |f| %>
-
-    <%= f.label :address ,'・送付先住所' %><br />
+    <%= f.label :address ,'送付先住所' %><br />
     <%= f.text_field :address , value: current_user.default_address %><br />
 
-    <%= f.label :deliver_time, '・希望配送時間帯' %><br />
+    <%= f.label :deliver_time, '希望配送時間帯' %><br />
     <%= f.select :deliver_time, {'8-12': 1, '12-14': 2,'14-16': 3, '16-18': 4, '18-20': 5, '20-21': 6}, :selected=>current_user.default_deliver_time %><br />
 
     <%= f.submit "購入する" %>
