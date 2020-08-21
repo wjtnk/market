@@ -4,13 +4,28 @@
 <% else %>
   <%= link_to '購入に進む', new_order_path %>
 <% end %>
-<p>--------------------</p>
+<p style="color: coral">==========================================================</p>
 
 <% @items.each do |item_id, count| %>
-  <% item = get_item(item_id) %>
-  <p>商品名:<%= item.name %></p>
-  <p>価格:<%= item.price %></p>
-  <p>個数:<%= count %></p>
-  <%= link_to 'カートから商品を削除する', item_remove_from_cart_path(item) %>
-  <p>================</p>
+  <table border="1">
+    <tr>
+      <th>商品名</th>
+      <th>価格</th>
+      <th>個数</th>
+      <th></th>
+    </tr>
+
+    <% item = get_item(item_id) %>
+
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= item.price %>円</td>
+      <td><%= count %></td>
+      <td><%= link_to 'カートから商品を削除する', item_remove_from_cart_path(item) %></td>
+    </tr>
+
+  </table>
+
+  <p style="color: coral">==========================================================</p>
+
 <% end %>
