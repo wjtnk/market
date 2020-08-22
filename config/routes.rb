@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   resources :items, only: [:index] do
     member do
-      post :add , as: 'item_add_to_cart'
-      delete :remove , as: 'item_remove_from_cart'
+      post :add
+      delete :remove
     end
   end
 

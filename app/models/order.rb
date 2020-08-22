@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   belongs_to :user
 
   DELIVER_TIME = { "8-12" => 1, "12-14" => 2, "14-16" => 3, "16-18" => 4, "18-20" => 5, "20-21" => 6 }
-  
+
   # 購入する商品の合計個数を算出する
   def self.get_item_count(items)
     count = 0
