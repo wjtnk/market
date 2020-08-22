@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!,only:[:add, :remove]
 
   def index
-    @items = Item.where(is_hidden: false).order(:display_order)
+    @items = Item.displayable
   end
 
   def add
