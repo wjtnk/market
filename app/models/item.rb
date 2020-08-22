@@ -2,7 +2,7 @@ class Item < ApplicationRecord
 
   has_many :purchase_items, dependent: :destroy
 
-  # キャッシュからItemを取得
+  # カート(キャッシュ)からItemを取得
   # user_idをkeyとして、{itemのid => itemの個数}
   # e.g){ 1 => 500, 2 => 100, 3 =>10} の時、itemのidが1のものが500個、itemのidが2のものが100個、itemのidが3のもの10個
   def self.get_items(user_id)
