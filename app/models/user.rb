@@ -6,4 +6,10 @@ class User < ApplicationRecord
 
   has_many :orders, dependent: :destroy
 
+  def create_order(address, deliver_time)
+    # order = orders.build(
+    #   ....
+    # )
+    # order.save
+  end
 end
