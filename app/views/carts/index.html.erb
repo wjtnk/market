@@ -8,9 +8,7 @@
 <p style="color: coral">==========================================================</p>
 
 <% @carts.each do |cart| %>
-
-  <% item = get_item(cart.item_id) %>
-  <%= image_tag item.image , width: "300px" %>
+  <%= image_tag cart.item.image , width: "300px" %>
 
   <table border="1">
     <tr>
@@ -19,13 +17,13 @@
       <th>個数</th>
     </tr>
     <tr>
-      <td><%= item.name %></td>
-      <td><%= item.price %>円</td>
+      <td><%= cart.item.name %></td>
+      <td><%= cart.item.price %>円</td>
       <td><%= cart.count %></td>
     </tr>
   </table>
 
-  <%= button_to 'カートから商品を削除する', remove_item_path(item), method: :delete %>
+  <%= button_to 'カートから商品を削除する', remove_item_path(cart.item), method: :delete %>
 
   <p style="color: coral">==========================================================</p>
 
