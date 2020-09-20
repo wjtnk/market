@@ -31,13 +31,13 @@ class Item < ApplicationRecord
   #   Rails.cache.write(user_id, item)
   # end
 
-  # カート(キャッシュ)からItemを削除
-  def self.remove_item(user_id, item_id)
-    item = Rails.cache.read(user_id)
-    item[item_id] -=  1
-    # 0以下になればhashから削除
-    item.delete(item_id) if item[item_id] <= 0
-    Rails.cache.write(user_id, item)
-  end
+  # # カート(キャッシュ)からItemを削除
+  # def self.remove_item(user_id, item_id)
+  #   item = Rails.cache.read(user_id)
+  #   item[item_id] -=  1
+  #   # 0以下になればhashから削除
+  #   item.delete(item_id) if item[item_id] <= 0
+  #   Rails.cache.write(user_id, item)
+  # end
 
 end

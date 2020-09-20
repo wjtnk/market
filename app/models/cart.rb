@@ -2,7 +2,7 @@ class Cart < ApplicationRecord
   belongs_to :user
   belongs_to :item
 
-  # カート(キャッシュ)にitemを追加
+  # カートにitemを追加
   def self.add_item(user_id, item_id)
     cart = self.find_by(user_id: user_id, item_id:item_id)
 
@@ -20,5 +20,16 @@ class Cart < ApplicationRecord
     cart.update(count: cart.count += 1)
   end
 
+  # カートからItemを削除
+  def self.remove_item(user_id, item_id)
+    cart = self.find_by(user_id: user_id, item_id:item_id)
+
+    # cart.countが1個以上ある時はcountを1つ減らす
+    if cart.count >= 1
+      cart.update(count: cart.count -= 1)
+    end
+
+    cart.destroy
+  end
 
 end

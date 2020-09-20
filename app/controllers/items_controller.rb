@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   end
 
   def remove
-    Item.remove_item(current_user.id, params[:id])
+    Cart.remove_item(current_user.id, params[:id])
     redirect_back fallback_location: root_path, notice: "カートから商品を削除しました!!"
   end
 
