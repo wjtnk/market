@@ -9,9 +9,13 @@ class Order < ApplicationRecord
   def self.create_order(user_id, address, deliver_time)
     ActiveRecord::Base.transaction do
 
-      items = Item.get_items(user_id)
-      item_count = self.get_item_count(items)
-      item_total_price, delivery_fee, cash_on_delivery_fee, order_total_price = Order.get_order_each_prices(items, item_count)
+      carts = Cart.where(user_id: user_id)
+      item_count = Cart.get_item_count(carts)
+
+      item_total_price = Order.get_item_total_price(carts)
+      delivery_fee = Order.get_delivery_fee(item_count)
+      cash_on_delivery_fee = Order.get_cash_on_delivery_fee(item_total_price)
+      order_total_price = Order.get_order_total_price(item_total_price, delivery_fee, cash_on_delivery_fee)
 
       #注文を作成
       order = self.create!(
@@ -24,15 +28,16 @@ class Order < ApplicationRecord
       )
 
       # 商品の購入履歴を記入
-      items.each do |item_id, count|
+      carts.each do |cart|
         PurchaseItem.create!(
-            item_id: item_id,
+            item_id: cart.item_id,
             order_id: order.id,
-            count: count
+            count: cart.count
         )
       end
-      # 購入後はキャッシュに入っている商品を削除
-      Rails.cache.delete(user_id)
+
+      # 購入後はカートに入っている商品を削除
+      carts.destroy_all
 
     end
   end
