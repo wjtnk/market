@@ -9,13 +9,13 @@ class Order < ApplicationRecord
   def self.create_order(user_id, address, deliver_time)
     ActiveRecord::Base.transaction do
 
-      carts = Cart.where(user_id: user_id)
+      carts      = Cart.where(user_id: user_id)
       item_count = Cart.get_item_count(carts)
 
-      item_total_price = Order.get_item_total_price(carts)
-      delivery_fee = Order.get_delivery_fee(item_count)
-      cash_on_delivery_fee = Order.get_cash_on_delivery_fee(item_total_price)
-      order_total_price = Order.get_order_total_price(item_total_price, delivery_fee, cash_on_delivery_fee)
+      item_total_price     = self.get_item_total_price(carts)
+      delivery_fee         = self.get_delivery_fee(item_count)
+      cash_on_delivery_fee = self.get_cash_on_delivery_fee(item_total_price)
+      order_total_price    = self.get_order_total_price(item_total_price, delivery_fee, cash_on_delivery_fee)
 
       #注文を作成
       order = self.create!(
