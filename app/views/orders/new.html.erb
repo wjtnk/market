@@ -1,6 +1,6 @@
 <h1>購入する</h1>
 
-<% if @item_count > 0 %>
+<% if @order.item_count > 0 %>
 
   <h2>購入商品</h2>
 
@@ -37,11 +37,11 @@
       <th>お支払い合計金額(×税8%)</th>
     </tr>
     <tr>
-      <td><%= @item_total_price %>円</td>
-      <td><%= @delivery_fee %>円</td>
-      <td><%= @item_count %>個</td>
-      <td><%= @cash_on_delivery_fee %>円</td>
-      <td><%= @order_total_price %>円</td>
+      <td><%= @order.item_total_price %>円</td>
+      <td><%= @order.delivery_fee %>円</td>
+      <td><%= @order.item_count %>個</td>
+      <td><%= @order.cash_on_delivery_fee %>円</td>
+      <td><%= @order.order_total_price %>円</td>
     </tr>
   </table>
 
