@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
 
-  attr_accessor :user_id, :address, :deliver_time,:carts,:item_count,:item_total_price,:delivery_fee,:cash_on_delivery_fee,:order_total_price
+  attr_accessor :user_id, :carts, :item_count, :item_total_price, :delivery_fee, :cash_on_delivery_fee, :order_total_price
 
   has_many :purchase_items, dependent: :destroy
   belongs_to :user
@@ -9,8 +9,6 @@ class Order < ApplicationRecord
 
   after_initialize do |order|
     @user_id      = user_id
-    @address      = address
-    @deliver_time = deliver_time
 
     @carts      = Cart.where(user_id: user_id)
     @item_count = Cart.get_item_count(@carts)
@@ -21,7 +19,7 @@ class Order < ApplicationRecord
     @order_total_price    = get_order_total_price
   end
 
-  def purchase
+  def purchase(address, deliver_time)
     ActiveRecord::Base.transaction do
 
       #注文を作成
@@ -29,8 +27,8 @@ class Order < ApplicationRecord
           delivery_fee: @delivery_fee,
           cash_on_delivery_fee: @cash_on_delivery_fee,
           total_price: @order_total_price,
-          address: @address,
-          deliver_time: @deliver_time,
+          address: address,
+          deliver_time: deliver_time,
           user: User.find(@user_id)
       )
 

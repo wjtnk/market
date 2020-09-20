@@ -12,8 +12,8 @@ class OrdersController < ApplicationController
 
   # カートに保存している商品を購入
   def create
-    order = Order.new(user_id: current_user.id, address:params[:address], deliver_time:params[:deliver_time])
-    order.purchase
+    order = Order.new(user_id: current_user.id)
+    order.purchase(params[:address], params[:deliver_time])
     redirect_to orders_path, notice: '購入ありがとうございます!!'
   end
 
