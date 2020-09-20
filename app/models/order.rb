@@ -5,17 +5,6 @@ class Order < ApplicationRecord
 
   DELIVER_TIME = { "8-12" => 1, "12-14" => 2, "14-16" => 3, "16-18" => 4, "18-20" => 5, "20-21" => 6 }
 
-  # 購入する商品の合計個数を算出する
-  def self.get_item_count(items)
-    count = 0
-    #itemが[]なら0を返却
-    return 0 if items.blank?
-    items.values.each do |item|
-      count += item
-    end
-    count
-  end
-
   # 注文作成に必要な金額をそれぞれ返す
   # return 商品の合計数,送料,代引き手数料,商品合計金額
   def self.get_order_each_prices(items, item_count)

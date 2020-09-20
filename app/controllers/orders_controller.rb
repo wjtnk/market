@@ -6,9 +6,13 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @items = Item.get_items(current_user.id)
-    @item_count = Order.get_item_count(@items)
-    @item_total_price, @delivery_fee, @cash_on_delivery_fee, @order_total_price = Order.get_order_each_prices(@items, @item_count)
+    @carts = Cart.where(user_id: current_user.id)
+    @item_count = Cart.get_item_count(@carts)
+    @item_total_price, @delivery_fee, @cash_on_delivery_fee, @order_total_price = 1,1,1,1
+
+    # @items = Item.get_items(current_user.id)
+    # @item_count = Order.get_item_count(@items)
+    # @item_total_price, @delivery_fee, @cash_on_delivery_fee, @order_total_price = Order.get_order_each_prices(@items, @item_count)
   end
 
   # カート(キャッシュ)に保存している商品を購入
