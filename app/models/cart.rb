@@ -24,9 +24,10 @@ class Cart < ApplicationRecord
   def self.remove_item(user_id, item_id)
     cart = self.find_by(user_id: user_id, item_id:item_id)
 
-    # cart.countが1個以上ある時はcountを1つ減らす
-    if cart.count >= 1
+    # cart.countが2個以上ある時はcountを1つ減らしてreturn
+    if cart.count >= 2
       cart.update(count: cart.count -= 1)
+      return
     end
 
     cart.destroy
