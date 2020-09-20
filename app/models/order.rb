@@ -19,33 +19,6 @@ class Order < ApplicationRecord
     @order_total_price    = get_order_total_price
   end
 
-  def purchase(address, deliver_time)
-    ActiveRecord::Base.transaction do
-
-      #注文を作成
-      order = Order.create!(
-          delivery_fee: @delivery_fee,
-          cash_on_delivery_fee: @cash_on_delivery_fee,
-          total_price: @order_total_price,
-          address: address,
-          deliver_time: deliver_time,
-          user: User.find(@user_id)
-      )
-
-      # 商品の購入履歴を記入
-      @carts.each do |cart|
-        PurchaseItem.create!(
-            item_id: cart.item_id,
-            order_id: order.id,
-            count: cart.count
-        )
-      end
-
-      # 購入後はカートに入っている商品を削除
-      @carts.destroy_all
-    end
-  end
-
   # 商品合計金額
   def get_item_total_price
     item_total_price = 0
