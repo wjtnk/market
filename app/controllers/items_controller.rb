@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   end
 
   def add
-    Item.add_item(current_user.id, params[:id])
+    Cart.add_item(current_user.id, params[:id])
     redirect_to carts_path, notice: "カートに商品を追加しました!!"
   end
 
