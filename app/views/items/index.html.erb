@@ -18,7 +18,7 @@
   </table>
 
   <% if user_signed_in? %>
-    <%= button_to 'カートに入れる', add_item_path(item), method: :post %>
+    <%= button_to 'カートに入れる', carts_path, method: :post, params: { item_id: item.id } %>
   <% end %>
 
   <p style="color: coral">==========================================================</p>
