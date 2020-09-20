@@ -5,16 +5,6 @@ class Order < ApplicationRecord
 
   DELIVER_TIME = { "8-12" => 1, "12-14" => 2, "14-16" => 3, "16-18" => 4, "18-20" => 5, "20-21" => 6 }
 
-  # 注文作成に必要な金額をそれぞれ返す
-  # return 商品の合計数,送料,代引き手数料,商品合計金額
-  def self.get_order_each_prices(items, item_count)
-    item_total_price = self.get_item_total_price(items)
-    delivery_fee = self.get_delivery_fee(item_count)
-    cash_on_delivery_fee = self.get_cash_on_delivery_fee(item_total_price)
-    order_total_price = self.get_order_total_price(item_total_price, delivery_fee, cash_on_delivery_fee)
-    return item_total_price, delivery_fee, cash_on_delivery_fee, order_total_price
-  end
-
   # 商品を購入
   def self.create_order(user_id, address, deliver_time)
     ActiveRecord::Base.transaction do
@@ -47,13 +37,11 @@ class Order < ApplicationRecord
     end
   end
 
-  private
-
-  #商品合計金額
-  def self.get_item_total_price(items)
+  # 商品合計金額
+  def self.get_item_total_price(carts)
     item_total_price = 0
-    items.each do |item_id, count|
-      item_total_price += Item.find(item_id).price * count
+    carts.each do |cart|
+      item_total_price += cart.item.price * cart.count
     end
     item_total_price
   end
