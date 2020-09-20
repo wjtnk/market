@@ -1,5 +1,5 @@
 <h1>カート一覧</h1>
-<% if @items.blank? %>
+<% if @carts.blank? %>
   <p>カートに商品はありません</p>
 <% else %>
   <%= link_to '購入に進む', new_order_path %>
@@ -7,9 +7,9 @@
 <%= link_to '買い物を続ける', root_path %>
 <p style="color: coral">==========================================================</p>
 
-<% @items.each do |item_id, count| %>
+<% @carts.each do |cart| %>
 
-  <% item = get_item(item_id) %>
+  <% item = get_item(cart.item_id) %>
   <%= image_tag item.image , width: "300px" %>
 
   <table border="1">
@@ -21,7 +21,7 @@
     <tr>
       <td><%= item.name %></td>
       <td><%= item.price %>円</td>
-      <td><%= count %></td>
+      <td><%= cart.count %></td>
     </tr>
   </table>
 
