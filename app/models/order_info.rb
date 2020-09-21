@@ -4,7 +4,7 @@ class OrderInfo
 
   def initialize(user_id)
     @user_id = user_id
-    @carts = Cart.where(user_id: user_id)
+    @carts   = Cart.where(user_id: user_id)
 
     @item_count = get_item_count(@carts)
 
