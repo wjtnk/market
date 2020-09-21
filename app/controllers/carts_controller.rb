@@ -6,16 +6,8 @@ class CartsController < ApplicationController
   end
 
   def create
-    cart = Cart.find_by(user_id: current_user.id, item_id: params[:item_id])
-
-    if cart.blank?
-      # itemが新しいものだったら「count: 1」として新規作成してreturn
-      Cart.create!(user_id: current_user.id, item_id: params[:item_id], count: 1)
-    else
-      # countに+1して更新
-      cart.update(count: cart.count += 1)
-    end
-
+    cart = Cart.find_or_initialize_by(user_id: current_user.id, item_id: params[:item_id])
+    cart.add
     redirect_to carts_path, notice: "カートに商品を追加しました!!"
   end
 
