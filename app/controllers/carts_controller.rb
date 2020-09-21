@@ -13,14 +13,7 @@ class CartsController < ApplicationController
 
   def remove
     cart = Cart.find_by(user_id: current_user.id, item_id: params[:item_id])
-
-    # cart.countが2個以上ある時はcountを1つ減らす
-    if cart.count >= 2
-      cart.update(count: cart.count -= 1)
-    else
-      cart.destroy
-    end
-
+    cart.remove
     redirect_back fallback_location: root_path, notice: "カートから商品を削除しました!!"
   end
 

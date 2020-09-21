@@ -13,4 +13,13 @@ class Cart < ApplicationRecord
     end
   end
 
+  def remove
+    # cart.countが2個以上ある時はcountを1つ減らす
+    if self.count >= 2
+      self.update(count: self.count -= 1)
+    else
+      self.destroy
+    end
+  end
+
 end
