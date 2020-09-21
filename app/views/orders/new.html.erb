@@ -4,7 +4,7 @@
 
   <h2>購入商品</h2>
 
-  <% @carts.each do |cart| %>
+  <% @order.carts.each do |cart| %>
 
     <%= image_tag cart.item.image , width: "300px" %>
 
