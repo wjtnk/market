@@ -9,13 +9,20 @@ class User < ApplicationRecord
   def purchase(address, deliver_time)
     carts      = Cart.where(user_id: id)
 
+    order = Order.new
+    item_count           = order.get_item_count(carts)
+    delivery_fee         = order.get_delivery_fee(item_count)
+    item_total_price     = order.get_item_total_price(carts)
+    cash_on_delivery_fee = order.get_cash_on_delivery_fee(item_total_price)
+    order_total_price    = order.get_order_total_price(item_total_price, delivery_fee, cash_on_delivery_fee)
+
     ActiveRecord::Base.transaction do
 
       #注文を作成
       order = Order.create!(
-          delivery_fee: 100,
-          cash_on_delivery_fee: 100,
-          total_price: 100,
+          delivery_fee: delivery_fee,
+          cash_on_delivery_fee: cash_on_delivery_fee,
+          total_price: order_total_price,
           address: address,
           deliver_time: deliver_time,
           user: self
