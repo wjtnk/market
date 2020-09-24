@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @orders = Order.where(user_id: current_user.id).order(id: "DESC")
+    @orders = current_user.orders.where(user_id: current_user.id).order(id: "DESC")
   end
 
   def new
