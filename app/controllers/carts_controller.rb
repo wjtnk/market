@@ -6,8 +6,12 @@ class CartsController < ApplicationController
   end
 
   def create
+    # user <- cart <- cart_item -> item だとしたら
+    # current_user.cart.add_item(params[:item_id], params[:amount])
+
     cart = current_user.carts.find_or_initialize_by(item_id: params[:item_id])
-    cart.add
+    cart.add(params[:amount])
+
     redirect_to carts_path, notice: "カートに商品を追加しました!!"
   end
 
