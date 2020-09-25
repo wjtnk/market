@@ -8,8 +8,6 @@ class User < ApplicationRecord
   has_many :carts, dependent: :destroy
 
   def purchase(address, deliver_time)
-    order_info = OrderInfo.new(self.id)
-
     ActiveRecord::Base.transaction do
 
       #注文を作成
@@ -36,4 +34,16 @@ class User < ApplicationRecord
     end
   end
 
+  def order_info
+    # if @order_info
+    #   @order_info
+    # else
+    #   @order_info = OrderInfo.new(self.id)
+    #   @order_info
+    # end
+
+    # @order_info = (@order_info || OrderInfo.new(self.id))
+
+    @order_info ||= OrderInfo.new(self.id)
+  end
 end

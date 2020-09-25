@@ -1,26 +1,34 @@
 class OrderInfo
 
-  attr_accessor :user_id, :carts, :item_count, :item_total_price, :delivery_fee, :cash_on_delivery_fee, :order_total_price
+  attr_accessor :user_id, :carts, :item_total_price, :cash_on_delivery_fee, :order_total_price
 
   def initialize(user_id)
     @user_id = user_id
-    @carts   = Cart.where(user_id: user_id)
+    # @carts   = Cart.where(user_id: user_id)
 
-    @item_count = get_item_count
+    # @item_count = get_item_count
 
     @item_total_price     = get_item_total_price
-    @delivery_fee         = get_delivery_fee
+    # @delivery_fee         = get_delivery_fee
     @cash_on_delivery_fee = get_cash_on_delivery_fee
     @order_total_price    = get_order_total_price
   end
 
+  def carts
+    @carts ||= Cart.where(user_id: user_id)
+  end
+
   # カートに入っている商品(購入する商品)の合計個数を返す
   def get_item_count
-    count = 0
-    carts.each do |cart|
-      count += cart.count
-    end
-    count
+    # count = 0
+    # carts.each do |cart|
+    #   count += cart.count
+    # end
+    # count
+
+    @item_count ||= carts.map do |cart|
+      cart.count
+    end.sum
   end
 
   # 商品合計金額
@@ -33,8 +41,8 @@ class OrderInfo
   end
 
   #送料算出(5商品ごとに600円追加)
-  def get_delivery_fee
-    ( (item_count / 6) + 1 ) * 600
+  def delivery_fee
+    @delivery_fee ||= ( (item_count / 6) + 1 ) * 600
   end
 
   #代引き手数料算出

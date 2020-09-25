@@ -14,3 +14,20 @@ Rails.application.routes.draw do
   end
 
 end
+
+# user <- OrderInfo <- Cart -> item # 現状
+# user <- cart <- cart_item -> item
+# user <- order <- purchase_item -> item
+
+# class Cart
+#   import PriceCalculator
+# end
+
+# class Order
+#   import PriceCalculator
+# end
+
+# module PriceCalculator
+#   def get_item_count
+#   end
+# end
