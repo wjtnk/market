@@ -1,23 +1,27 @@
 class Cart < ApplicationRecord
   belongs_to :user
 
-  def add
-    if self.new_record?
+  def add_item(item_id)
+    cart_item = self.cart_item.find_by(item: item_id)
+
+    if cart_item.blank?
       # itemが新しいものだったら「count: 1」として新規作成
-      self.count = 1
-      self.save!
+      cart_item.count = 1
+      cart_item.save!
     else
       # countに+1して更新
-      self.update(count: self.count += 1)
+      cart_item.update(count: self.count += 1)
     end
+
   end
 
-  def remove
+  def remove_item(item_id)
+    cart_item = self.cart_item.find_by(item: item_id)
     # cart.countが2個以上ある時はcountを1つ減らす
-    if self.count >= 2
-      self.update(count: self.count -= 1)
+    if cart_item.count >= 2
+      cart_item.update(count: self.count -= 1)
     else
-      self.destroy
+      cart_item.destroy
     end
   end
 

@@ -5,15 +5,15 @@ class CartsController < ApplicationController
     @carts = current_user.carts
   end
 
-  def create
-    cart = current_user.carts.find_or_initialize_by(item_id: params[:item_id])
-    cart.add
+  def add_item
+    cart = current_user.carts.find(params[:id])
+    cart.add_item(params[:item_id])
     redirect_to carts_path, notice: "カートに商品を追加しました!!"
   end
 
-  def remove
-    cart = current_user.carts.find_by(item_id: params[:item_id])
-    cart.remove
+  def remove_item
+    cart = current_user.carts.find(params[:id])
+    cart.remove_item(params[:item_id])
     redirect_back fallback_location: root_path, notice: "カートから商品を削除しました!!"
   end
 

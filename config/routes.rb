@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :new, :create]
 
   resources :carts, only: [:index, :new, :create] do
-    collection do
-      delete :remove
+    member do
+      post :add_item
+      delete :remove_item
     end
   end
 
