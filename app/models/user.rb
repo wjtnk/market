@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders, dependent: :destroy
-  has_many :carts, dependent: :destroy
+  has_one :cart, dependent: :destroy
 
   def purchase(address, deliver_time)
     order_info = OrderInfo.new(self.id)
