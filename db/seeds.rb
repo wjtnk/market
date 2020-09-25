@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(
+user = User.create!(
     [
         {
             email: 'sample@sample.com',
@@ -13,6 +13,14 @@ User.create!(
             name: 'sample太郎',
             default_address: '新宿区西新宿2-8-1',
             default_deliver_time: 1
+        },
+    ]
+)
+
+Cart.create!(
+    [
+        {
+            user_id: user[0].id
         },
     ]
 )

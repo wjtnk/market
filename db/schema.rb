@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(version: 2020_09_25_014735) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "item_count"
-    t.integer "item_total_price"
-    t.integer "delivery_fee"
-    t.integer "cash_on_delivery_fee"
-    t.integer "order_total_price"
+    t.integer "item_count", default: 0, null: false
+    t.integer "item_total_price", default: 0, null: false
+    t.integer "delivery_fee", default: 0, null: false
+    t.integer "cash_on_delivery_fee", default: 0, null: false
+    t.integer "order_total_price", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_carts_on_user_id"
