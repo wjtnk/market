@@ -23,7 +23,7 @@
     </tr>
   </table>
 
-  <%= button_to 'カートから商品を削除する', remove_carts_path, method: :delete, params: { item_id: cart.item.id } %>
+  <%= button_to 'カートから商品を削除する', remove_item_carts_path, method: :delete, params: { item_id: cart.item.id } %>
 
   <p style="color: coral">==========================================================</p>
 
