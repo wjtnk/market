@@ -7,11 +7,13 @@ class Cart < ApplicationRecord
 
     if cart_item.blank?
       # itemが新しいものだったら「count: 1」として新規作成
-      cart_item.count = 1
-      cart_item.save!
+      self.cart_items.create!(
+          item_id: item_id,
+          count: 1,
+      )
     else
       # countに+1して更新
-      cart_item.update(count: self.count += 1)
+      cart_item.update(count: cart_item.count += 1)
     end
 
   end
@@ -20,7 +22,7 @@ class Cart < ApplicationRecord
     cart_item = self.cart_items.find_by(item: item_id)
     # cart.countが2個以上ある時はcountを1つ減らす
     if cart_item.count >= 2
-      cart_item.update(count: self.count -= 1)
+      cart_item.update(count: cart_item.count -= 1)
     else
       cart_item.destroy
     end
