@@ -1,6 +1,8 @@
 class Cart < ApplicationRecord
+
   belongs_to :user
   has_many :cart_items, dependent: :destroy
+  has_many :items, through: :cart_items
 
   def add_item(item_id)
     cart_item = self.cart_items.find_by(item: item_id)
