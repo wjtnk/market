@@ -16,6 +16,8 @@ class Cart < ApplicationRecord
       cart_item.update(count: cart_item.count += 1)
     end
 
+    self.recalculate_each_prices
+
   end
 
   def remove_item(item_id)
@@ -26,12 +28,25 @@ class Cart < ApplicationRecord
     else
       cart_item.destroy
     end
+
+    self.recalculate_each_prices
+
+  end
+
+  def recalculate_each_prices
+    self.update!(
+        item_count: self.item_count,
+        item_total_price: self.item_total_price,
+        delivery_fee: self.delivery_fee,
+        cash_on_delivery_fee: self.cash_on_delivery_fee,
+        order_total_price: self.order_total_price
+    )
   end
 
   # カートに入っている商品(購入する商品)の合計個数を返す
   def item_count
     count = 0
-    carts.each do |cart|
+    self.cart_items.each do |cart|
       count += cart.count
     end
     count
@@ -40,7 +55,7 @@ class Cart < ApplicationRecord
   # 商品合計金額
   def item_total_price
     item_total_price = 0
-    carts.each do |cart|
+    self.cart_items.each do |cart|
       item_total_price += cart.item.price * cart.count
     end
     item_total_price
@@ -48,11 +63,13 @@ class Cart < ApplicationRecord
 
   #送料算出(5商品ごとに600円追加)
   def delivery_fee
-    ( (item_count / 6) + 1 ) * 600
+    ( (self.item_count / 6) + 1 ) * 600
   end
 
   #代引き手数料算出
   def cash_on_delivery_fee
+    item_total_price = self.item_total_price
+
     if 0 <= item_total_price && item_total_price < 10000
       300
     elsif 10000 <= item_total_price && item_total_price < 30000
@@ -64,11 +81,12 @@ class Cart < ApplicationRecord
     else
       0
     end
+
   end
 
   # 商品の税込み合計金額
   def order_total_price
-    ((item_total_price + delivery_fee + cash_on_delivery_fee) * 1.08).floor
+    ((self.item_total_price + self.delivery_fee + self.cash_on_delivery_fee) * 1.08).floor
   end
 
 end
