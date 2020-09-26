@@ -4,9 +4,9 @@
 
   <h2>購入商品</h2>
 
-  <% @cart.items.each do |item| %>
+  <% @cart.cart_items.each do |cart_item| %>
 
-    <%= image_tag item.image , width: "300px" %>
+    <%= image_tag cart_item.item.image , width: "300px" %>
 
     <table border="1">
       <tr>
@@ -15,9 +15,9 @@
         <th>合計</th>
       </tr>
       <tr>
-        <td><%= item.name %></td>
-        <td><%= item.price %>円(個数:<%= item.cart_items.count %>)</td>
-        <td><%= item.price * item.cart_items.count %>円</td>
+        <td><%= cart_item.item.name %></td>
+        <td><%= cart_item.item.price %>円(個数:<%= cart_item.count %>)</td>
+        <td><%= cart_item.item.price * cart_item.count %>円</td>
       </tr>
     </table>
 
