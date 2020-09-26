@@ -32,7 +32,8 @@ class Cart < ApplicationRecord
     self.recalculate_each_prices
 
   end
-
+  
+  # カート内の商品の送料などの料金を計算し直す
   def recalculate_each_prices
     self.update!(
         item_count: self.item_count,
