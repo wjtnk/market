@@ -4,6 +4,37 @@ class Cart < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :items, through: :cart_items
 
+  def purchase(address, deliver_time)
+
+    ActiveRecord::Base.transaction do
+
+      #注文を作成
+      order = Order.create!(
+          delivery_fee: self.delivery_fee,
+          cash_on_delivery_fee: self.cash_on_delivery_fee,
+          total_price: self.order_total_price,
+          address: address,
+          deliver_time: deliver_time,
+          user: self.user
+      )
+
+      # 商品の購入履歴を記入
+      self.cart_items.each do |cart_item|
+        PurchaseItem.create!(
+            item_id: cart_item.item.id,
+            order_id: order.id,
+            count: cart_item.count
+        )
+      end
+
+      # 購入後はカートに入っている商品を削除
+      self.cart_items.destroy_all
+
+      self.recalculate_each_prices
+
+    end
+  end
+
   def add_item(item_id)
     cart_item = self.cart_items.find_by(item: item_id)
 
