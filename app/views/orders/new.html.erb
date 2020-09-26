@@ -1,12 +1,12 @@
 <h1>購入する</h1>
 
-<% if @order_info.item_count > 0 %>
+<% if @cart.item_count > 0 %>
 
   <h2>購入商品</h2>
 
-  <% @order_info.carts.each do |cart| %>
+  <% @cart.cart_items.each do |cart_item| %>
 
-    <%= image_tag cart.item.image , width: "300px" %>
+    <%= image_tag cart_item.item.image , width: "300px" %>
 
     <table border="1">
       <tr>
@@ -15,9 +15,9 @@
         <th>合計</th>
       </tr>
       <tr>
-        <td><%= cart.item.name %></td>
-        <td><%= cart.item.price %>円(個数:<%= cart.count %>)</td>
-        <td><%=cart.item.price * cart.count %>円</td>
+        <td><%= cart_item.item.name %></td>
+        <td><%= cart_item.item.price %>円(個数:<%= cart_item.count %>)</td>
+        <td><%=cart_item.item.price * cart_item.count %>円</td>
       </tr>
     </table>
 
@@ -37,11 +37,11 @@
       <th>お支払い合計金額(×税8%)</th>
     </tr>
     <tr>
-      <td><%= @order_info.item_total_price %>円</td>
-      <td><%= @order_info.delivery_fee %>円</td>
-      <td><%= @order_info.item_count %>個</td>
-      <td><%= @order_info.cash_on_delivery_fee %>円</td>
-      <td><%= @order_info.order_total_price %>円</td>
+      <td><%= @cart.item_total_price %>円</td>
+      <td><%= @cart.delivery_fee %>円</td>
+      <td><%= @cart.item_count %>個</td>
+      <td><%= @cart.cash_on_delivery_fee %>円</td>
+      <td><%= @cart.order_total_price %>円</td>
     </tr>
   </table>
 
