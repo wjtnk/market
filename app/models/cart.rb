@@ -79,11 +79,9 @@ class Cart < ApplicationRecord
 
   # カートに入っている商品(購入する商品)の合計個数を返す
   def item_count
-    count = 0
-    self.cart_items.each do |cart|
-      count += cart.count
-    end
-    count
+    self.cart_items.map do |cart_item|
+      cart_item.count
+    end.sum
   end
 
   # 商品合計金額
