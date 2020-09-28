@@ -6,7 +6,6 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @cart = current_user.cart
   end
 
   # カートに保存している商品を購入
