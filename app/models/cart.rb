@@ -86,11 +86,9 @@ class Cart < ApplicationRecord
 
   # 商品合計金額
   def item_total_price
-    item_total_price = 0
-    self.cart_items.each do |cart|
-      item_total_price += cart.item.price * cart.count
-    end
-    item_total_price
+    self.cart_items.map do |cart_item|
+      cart_item.item.price * cart_item.count
+    end.sum
   end
 
   #送料算出(5商品ごとに600円追加)
