@@ -7,7 +7,8 @@ RSpec.describe Item, type: :model do
   end
 
   it "非表示商品を作成できること" do
-    expect(FactoryBot.build(:item, :item_hidden)).to be_valid
+    item = FactoryBot.build(:item, :item_hidden)
+    expect(item.is_hidden).to eq true
   end
 
 end
