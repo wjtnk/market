@@ -12,6 +12,12 @@ RSpec.describe User, type: :model do
     expect(user.errors[:email]).to include("can't be blank")
   end
 
+  it "パスワードがないとユーザーを作成できないこと" do
+    user = FactoryBot.build(:user, password: nil)
+    user.valid?
+    expect(user.errors[:password]).to include("can't be blank")
+  end
+
   it "Emailが重複していればユーザー作成できないこと" do
     FactoryBot.create(:user, email: "aaron@example.com")
     user = FactoryBot.build(:user, email: "aaron@example.com")
