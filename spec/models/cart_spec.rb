@@ -42,13 +42,12 @@ RSpec.describe Cart, type: :model do
     expect{ cart_item.cart.remove_item(cart_item.item_id) }.to change{ cart_item.reload.count }.from(2).to(1)
   end
 
-  describe "search message for a term" do
+  describe "カートに入っている商品の金額系" do
 
     before do
       # 同じカートにitem追加
       @item_1 = FactoryBot.create(:item, price:1000)
       @item_2 = FactoryBot.create(:item, price:1500)
-
       @cart_item_1 = FactoryBot.create(:cart_item, item: @item_1, count:2)
       @cart_item_2 = FactoryBot.create(:cart_item, cart: @cart_item_1.cart, item: @item_2, count:3)
     end
