@@ -36,7 +36,8 @@ RSpec.describe Cart, type: :model do
 
   it "カートから商品を削除できること" do
     cart_item = FactoryBot.create(:cart_item)
-    expect{ cart_item.cart.remove_item(cart_item.item_id) }.to change{ cart_item.count }.by(0)
+    cart_item.cart.remove_item(cart_item.item_id)
+    expect{cart_item.reload.count}.to raise_error ActiveRecord::RecordNotFound
   end
 
   it "カートに同じitemの商品が2個以上ある時,削除したらcountが1減ること" do
