@@ -12,6 +12,7 @@ RSpec.describe CartsController, type: :controller do
   end
 
   describe "#add_item" do
+
     it "商品を追加できること" do
       item = FactoryBot.create(:item)
       user = FactoryBot.create(:user)
@@ -20,11 +21,11 @@ RSpec.describe CartsController, type: :controller do
       expect(response).to redirect_to carts_path
     end
 
-    it "商品を追加するとadd_itemが1つ増えること" do
+    it "商品を追加するとcart_itemが1つ増えること" do
       user = FactoryBot.create(:user)
       FactoryBot.create(:cart_item, cart: user.cart)
-
       item = FactoryBot.create(:item)
+
       sign_in user
       expect{post :add_item, params: { item_id: item.id }}.to change{user.cart.cart_items.count}.from(1).to(2)
     end
@@ -32,6 +33,7 @@ RSpec.describe CartsController, type: :controller do
   end
 
   describe "#remove_item" do
+
     it "商品を削除できること" do
       user = FactoryBot.create(:user)
       cart_item = FactoryBot.create(:cart_item, cart: user.cart)
@@ -39,6 +41,17 @@ RSpec.describe CartsController, type: :controller do
       delete :remove_item, params: { item_id: cart_item.item_id }
       expect(response).to redirect_to root_path
     end
+
+    it "商品を削除するとcart_itemが1つ減ること" do
+      user = FactoryBot.create(:user)
+      FactoryBot.create(:cart_item, cart: user.cart)
+      item = FactoryBot.create(:item)
+      FactoryBot.create(:cart_item, cart: user.cart, item: item)
+      
+      sign_in user
+      expect{ delete :remove_item, params: { item_id: item.id } }.to change{user.cart.cart_items.count}.from(2).to(1)
+    end
+
   end
 
 end
