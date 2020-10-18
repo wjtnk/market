@@ -47,12 +47,22 @@ RSpec.describe Cart, type: :model do
 
   it "カートに入っている商品(購入する商品)の合計個数を返すこと" do
     cart_item = FactoryBot.create(:cart_item, count:10)
-
     # 同じカートにitem追加
     item = FactoryBot.create(:item)
     cart_item = FactoryBot.create(:cart_item, cart: cart_item.cart, item: item, count:20)
-
     expect( cart_item.cart.item_count ).to eq 30
+  end
+
+  it "カートに入っている商品合計金額を返すこと" do
+    # 同じカートにitem追加
+    item_1 = FactoryBot.create(:item, price:1000)
+    item_2 = FactoryBot.create(:item, price:1500)
+
+    cart_item_1 = FactoryBot.create(:cart_item, item: item_1, count:2)
+    cart_item_2 = FactoryBot.create(:cart_item, cart: cart_item_1.cart, item: item_2, count:3)
+
+    # 1000 * 2 + 1500 * 3 = 6500
+    expect( cart_item_2.cart.item_total_price ).to eq 6500
   end
 
 end
