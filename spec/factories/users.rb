@@ -5,5 +5,10 @@ FactoryBot.define do
     default_address "新宿区西新宿2-8-1"
     default_deliver_time 1
     password "password"
+
+    after(:create) do  |user|
+      FactoryBot.create(:cart, user: user)
+    end
+
   end
 end
