@@ -19,6 +19,16 @@ RSpec.describe CartsController, type: :controller do
       post :add_item, params: { item_id: item.id }
       expect(response).to redirect_to carts_path
     end
+
+    it "商品を追加するとadd_itemが1つ増えること" do
+      user = FactoryBot.create(:user)
+      FactoryBot.create(:cart_item, cart: user.cart)
+
+      item = FactoryBot.create(:item)
+      sign_in user
+      expect{post :add_item, params: { item_id: item.id }}.to change{user.cart.cart_items.count}.from(1).to(2)
+    end
+
   end
 
   describe "#remove_item" do
