@@ -21,14 +21,14 @@ RSpec.describe CartsController, type: :controller do
     end
   end
 
-  # describe "#remove_item" do
-  #   it "商品を追加できること" do
-  #     item = FactoryBot.create(:item)
-  #     user = FactoryBot.create(:user)
-  #     sign_in user
-  #     post :add_item, params: { item_id: item.id }
-  #     expect(response).to redirect_to carts_path
-  #   end
-  # end
+  describe "#remove_item" do
+    it "商品を削除できること" do
+      user = FactoryBot.create(:user)
+      cart_item = FactoryBot.create(:cart_item, cart: user.cart)
+      sign_in user
+      delete :remove_item, params: { item_id: cart_item.item_id }
+      expect(response).to redirect_to root_path
+    end
+  end
 
 end
