@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Cart, type: :model do
 
   describe "カートに商品を追加と削除" do
-    
+
     before do
       @cart = FactoryBot.create(:cart)
       @item = FactoryBot.create(:item)
@@ -14,34 +14,38 @@ RSpec.describe Cart, type: :model do
       expect(FactoryBot.build(:cart)).to be_valid
     end
 
-    it "カートに商品を加えられること" do
-      expect(@cart.add_item(@item.id)).to eq true
+    context "カートに商品を追加した時" do
+      it "カートに商品を加えられること" do
+        expect(@cart.add_item(@item.id)).to eq true
+      end
+
+      it "カートに商品を加えたとき、itemが新しいものだったらcart_itemsに「count: 1」として新規作成されること" do
+        expect{@cart.add_item(@item.id)}.to change{ @cart.cart_items.count }.from(0).to(1)
+      end
+
+      it "カートに商品を加えたとき、itemに同じものがあればcart_itemsに商品を追加してもcart_itemsの総数は更新されないこと" do
+        @cart.add_item(@item.id) #1つ目の商品追加
+        #2つ目の商品追加
+        expect{ @cart.add_item(@item.id) }.to change{ @cart.cart_items.count }.by(0)
+      end
+
+      it "カートに商品を加えたとき、itemに同じものがあればcart_itemsに「count: 2」として更新されること" do
+        @cart.add_item(@item.id) #1つ目の商品追加
+        #2つ目の商品追加
+        expect{ @cart.add_item(@item.id) }.to change{ @cart.cart_items.find_by(item: @item.id).count }.from(1).to(2)
+      end
     end
 
-    it "カートに商品を加えたとき、itemが新しいものだったらcart_itemsに「count: 1」として新規作成されること" do
-      expect{@cart.add_item(@item.id)}.to change{ @cart.cart_items.count }.from(0).to(1)
-    end
+    context "カートから商品を削除した時" do
+      it "カートから商品を削除できること" do
+        @cart_item.cart.remove_item(@cart_item.item_id)
+        expect{@cart_item.reload.count}.to raise_error ActiveRecord::RecordNotFound
+      end
 
-    it "カートに商品を加えたとき、itemに同じものがあればcart_itemsに商品を追加してもcart_itemsの総数は更新されないこと" do
-      @cart.add_item(@item.id) #1つ目の商品追加
-      #2つ目の商品追加
-      expect{ @cart.add_item(@item.id) }.to change{ @cart.cart_items.count }.by(0)
-    end
-
-    it "カートに商品を加えたとき、itemに同じものがあればcart_itemsに「count: 2」として更新されること" do
-      @cart.add_item(@item.id) #1つ目の商品追加
-      #2つ目の商品追加
-      expect{ @cart.add_item(@item.id) }.to change{ @cart.cart_items.find_by(item: @item.id).count }.from(1).to(2)
-    end
-
-    it "カートから商品を削除できること" do
-      @cart_item.cart.remove_item(@cart_item.item_id)
-      expect{@cart_item.reload.count}.to raise_error ActiveRecord::RecordNotFound
-    end
-
-    it "カートに同じitemの商品が2個以上ある時,削除したらcountが1減ること" do
-      cart_item = FactoryBot.create(:cart_item, count:2)
-      expect{ cart_item.cart.remove_item(cart_item.item_id) }.to change{ cart_item.reload.count }.from(2).to(1)
+      it "カートに同じitemの商品が2個以上ある時,削除したらcountが1減ること" do
+        cart_item = FactoryBot.create(:cart_item, count:2)
+        expect{ cart_item.cart.remove_item(cart_item.item_id) }.to change{ cart_item.reload.count }.from(2).to(1)
+      end
     end
 
   end
