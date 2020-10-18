@@ -39,4 +39,10 @@ RSpec.describe Cart, type: :model do
     expect{ cart_item.cart.remove_item(cart_item.item_id) }.to change{ cart_item.count }.by(0)
   end
 
+  it "カートに同じitemの商品が2個以上ある時,削除したらcountが1減ること" do
+    cart_item = FactoryBot.create(:cart_item, count:2)
+    cart_item.cart.remove_item(cart_item.item_id)
+    expect( cart_item.reload.count ).to eq 1
+  end
+
 end
