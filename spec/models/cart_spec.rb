@@ -22,16 +22,16 @@ RSpec.describe Cart, type: :model do
     cart = FactoryBot.create(:cart)
     item = FactoryBot.create(:item)
     cart.add_item(item.id) #1つ目の商品追加
-    cart.add_item(item.id) #2つ目の商品追加
-    expect(cart.cart_items.count).to eq 1
+    #2つ目の商品追加
+    expect{ cart.add_item(item.id) }.to change{ cart.cart_items.count }.by(0)
   end
 
   it "カートに商品を加えたとき、itemに同じものがあればcart_itemsに「count: 2」として更新されること" do
     cart = FactoryBot.create(:cart)
     item = FactoryBot.create(:item)
     cart.add_item(item.id) #1つ目の商品追加
-    cart.add_item(item.id) #2つ目の商品追加
-    expect( cart.cart_items.find_by(item: item.id).count ).to eq 2
+    #2つ目の商品追加
+    expect{ cart.add_item(item.id) }.to change{ cart.cart_items.find_by(item: item.id).count }.from(1).to(2)
   end
 
   it "カートから商品を削除できること" do
