@@ -45,4 +45,14 @@ RSpec.describe Cart, type: :model do
     expect( cart_item.reload.count ).to eq 1
   end
 
+  it "カートに入っている商品(購入する商品)の合計個数を返すこと" do
+    cart_item = FactoryBot.create(:cart_item, count:10)
+
+    # 同じカートにitem追加
+    item = FactoryBot.create(:item)
+    cart_item = FactoryBot.create(:cart_item, cart: cart_item.cart, item: item, count:20)
+
+    expect( cart_item.cart.item_count ).to eq 30
+  end
+
 end
