@@ -34,4 +34,9 @@ RSpec.describe Cart, type: :model do
     expect( cart.cart_items.find_by(item: item.id).count ).to eq 2
   end
 
+  it "カートから商品を削除できること" do
+    cart_item = FactoryBot.create(:cart_item)
+    expect{ cart_item.cart.remove_item(cart_item.item_id) }.to change{ cart_item.count }.by(0)
+  end
+
 end
