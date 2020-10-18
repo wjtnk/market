@@ -15,7 +15,7 @@ RSpec.describe Cart, type: :model do
   it "カートに商品を加えたとき、itemが新しいものだったらcart_itemsに「count: 1」として新規作成されること" do
     cart = FactoryBot.create(:cart)
     item = FactoryBot.create(:item)
-    expect{cart.add_item(item.id)}.to change{ cart.cart_items.count }.by(1)
+    expect{cart.add_item(item.id)}.to change{ cart.cart_items.count }.from(0).to(1)
   end
 
   it "カートに商品を加えたとき、itemに同じものがあればcart_itemsに商品を追加してもcart_itemsの総数は更新されないこと" do
