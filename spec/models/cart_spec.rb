@@ -68,4 +68,15 @@ RSpec.describe Cart, type: :model do
     expect( cart_item_2.cart.item_total_price ).to eq 6500
   end
 
+  it "カートに入っている送料(5商品ごとに600円追加)を返すこと" do
+    # 同じカートにitem追加
+    item_1 = FactoryBot.create(:item, price:1000)
+    item_2 = FactoryBot.create(:item, price:1500)
+
+    cart_item_1 = FactoryBot.create(:cart_item, item: item_1, count:2)
+    cart_item_2 = FactoryBot.create(:cart_item, cart: cart_item_1.cart, item: item_2, count:3)
+
+    expect( cart_item_2.cart.delivery_fee ).to eq 600
+  end
+
 end
