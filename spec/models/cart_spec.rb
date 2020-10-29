@@ -53,11 +53,8 @@ RSpec.describe Cart, type: :model do
     let(:item_1) { FactoryBot.create(:item, price:1000) }
     let(:item_2) { FactoryBot.create(:item, price:1500) }
     let(:cart_item) { FactoryBot.create(:cart_item, item: item_1, count:2) }
-    
-    before do
-      FactoryBot.create(:cart_item, cart: cart_item.cart, item: item_2, count:3)
-    end
-    
+    let!(:cart_item_1) { FactoryBot.create(:cart_item, cart: cart_item.cart, item: item_2, count:3) }
+
     it "カートに入っている商品(購入する商品)の合計個数を返すこと" do
       expect( cart_item.cart.item_count ).to eq 5
     end
