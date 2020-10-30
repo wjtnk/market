@@ -41,7 +41,7 @@ RSpec.describe Cart, type: :model do
       end
 
       it "カートに同じitemの商品が2個以上ある時,削除したらcountが1減ること" do
-        cart_item = FactoryBot.create(:cart_item, count:2)
+        cart_item = FactoryBot.create(:cart_item, count: 2)
         expect{ cart_item.cart.remove_item(cart_item.item_id) }.to change{ cart_item.reload.count }.from(2).to(1)
       end
     end
@@ -50,10 +50,10 @@ RSpec.describe Cart, type: :model do
 
   describe "カートに入っている商品の金額系" do
 
-    let(:item_1) { FactoryBot.create(:item, price:1000) }
-    let(:item_2) { FactoryBot.create(:item, price:1500) }
-    let(:cart_item) { FactoryBot.create(:cart_item, item: item_1, count:2) }
-    let!(:cart_item_1) { FactoryBot.create(:cart_item, cart: cart_item.cart, item: item_2, count:3) }
+    let(:item_1) { FactoryBot.create(:item, price: 1000) }
+    let(:item_2) { FactoryBot.create(:item, price: 1500) }
+    let(:cart_item) { FactoryBot.create(:cart_item, item: item_1, count: 2) }
+    let!(:cart_item_1) { FactoryBot.create(:cart_item, cart: cart_item.cart, item: item_2, count: 3) }
 
     it "カートに入っている商品(購入する商品)の合計個数を返すこと" do
       expect( cart_item.cart.item_count ).to eq 5
