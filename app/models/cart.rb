@@ -1,29 +1,26 @@
 class Cart < ApplicationRecord
-
   belongs_to :user
   has_many :cart_items, dependent: :destroy
   has_many :items, through: :cart_items
 
   def purchase(address, deliver_time)
-
     ActiveRecord::Base.transaction do
-
-      #注文を作成
+      # 注文を作成
       order = Order.create!(
-          delivery_fee: self.delivery_fee,
-          cash_on_delivery_fee: self.cash_on_delivery_fee,
-          total_price: self.order_total_price,
-          address: address,
-          deliver_time: deliver_time,
-          user: self.user
+        delivery_fee: self.delivery_fee,
+        cash_on_delivery_fee: self.cash_on_delivery_fee,
+        total_price: self.order_total_price,
+        address: address,
+        deliver_time: deliver_time,
+        user: self.user
       )
 
       # 商品の購入履歴を記入
       self.cart_items.each do |cart_item|
         PurchaseItem.create!(
-            item_id: cart_item.item.id,
-            order_id: order.id,
-            count: cart_item.count
+          item_id: cart_item.item.id,
+          order_id: order.id,
+          count: cart_item.count
         )
       end
 
@@ -31,7 +28,6 @@ class Cart < ApplicationRecord
       self.cart_items.destroy_all
 
       self.recalculate_each_prices
-
     end
   end
 
@@ -41,8 +37,8 @@ class Cart < ApplicationRecord
     if cart_item.blank?
       # itemが新しいものだったら「count: 1」として新規作成
       self.cart_items.create!(
-          item_id: item_id,
-          count: 1,
+        item_id: item_id,
+        count: 1
       )
     else
       # countに+1して更新
@@ -50,7 +46,6 @@ class Cart < ApplicationRecord
     end
 
     self.recalculate_each_prices
-
   end
 
   def remove_item(item_id)
@@ -63,17 +58,16 @@ class Cart < ApplicationRecord
     end
 
     self.recalculate_each_prices
-
   end
 
   # カート内の商品の送料などの料金を計算し直す
   def recalculate_each_prices
     self.update!(
-        item_count: self.item_count,
-        item_total_price: self.item_total_price,
-        delivery_fee: self.delivery_fee,
-        cash_on_delivery_fee: self.cash_on_delivery_fee,
-        order_total_price: self.order_total_price
+      item_count: self.item_count,
+      item_total_price: self.item_total_price,
+      delivery_fee: self.delivery_fee,
+      cash_on_delivery_fee: self.cash_on_delivery_fee,
+      order_total_price: self.order_total_price
     )
   end
 
@@ -91,12 +85,12 @@ class Cart < ApplicationRecord
     end.sum
   end
 
-  #送料算出(5商品ごとに600円追加)
+  # 送料算出(5商品ごとに600円追加)
   def delivery_fee
-    ( (self.item_count / 6) + 1 ) * 600
+    ((self.item_count / 6) + 1) * 600
   end
 
-  #代引き手数料算出
+  # 代引き手数料算出
   def cash_on_delivery_fee
     item_total_price = self.item_total_price
 
@@ -111,12 +105,10 @@ class Cart < ApplicationRecord
     else
       0
     end
-
   end
 
   # 商品の税込み合計金額
   def order_total_price
     ((self.item_total_price + self.delivery_fee + self.cash_on_delivery_fee) * 1.08).floor
   end
-
 end

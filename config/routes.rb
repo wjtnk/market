@@ -5,13 +5,12 @@ Rails.application.routes.draw do
 
   resources :items, only: [:index]
 
-  resources :orders, only: [:index, :new, :create]
+  resources :orders, only: %i[index new create]
 
-  resources :carts, only: [:index, :new] do
+  resources :carts, only: %i[index new] do
     collection do
       post :add_item
       delete :remove_item
     end
   end
-
 end

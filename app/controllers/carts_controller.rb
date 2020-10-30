@@ -7,12 +7,11 @@ class CartsController < ApplicationController
 
   def add_item
     current_user.cart.add_item(params[:item_id])
-    redirect_to carts_path, notice: "カートに商品を追加しました!!"
+    redirect_to carts_path, notice: 'カートに商品を追加しました!!'
   end
 
   def remove_item
     current_user.cart.remove_item(params[:item_id])
-    redirect_back fallback_location: root_path, notice: "カートから商品を削除しました!!"
+    redirect_back fallback_location: root_path, notice: 'カートから商品を削除しました!!'
   end
-
 end
