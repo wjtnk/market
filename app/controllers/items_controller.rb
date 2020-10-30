@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: %i[add remove]
+  before_action :authenticate_user!
 
   def index
     @items = Item.displayable

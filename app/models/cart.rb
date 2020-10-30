@@ -94,13 +94,13 @@ class Cart < ApplicationRecord
   def cash_on_delivery_fee
     item_total_price = self.item_total_price
 
-    if 0 <= item_total_price && item_total_price < 10000
+    if item_total_price >= 0 && item_total_price < 10000
       300
-    elsif 10000 <= item_total_price && item_total_price < 30000
+    elsif item_total_price >= 10000 && item_total_price < 30000
       400
-    elsif 30000 <= item_total_price && item_total_price < 100000
+    elsif item_total_price >= 30000 && item_total_price < 100000
       600
-    elsif 100000 < item_total_price
+    elsif item_total_price > 100000
       1000
     else
       0
