@@ -250,6 +250,9 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
+    standard (0.8.1)
+      rubocop (= 1.0.0)
+      rubocop-performance (= 1.8.1)
     sysexits (1.2.0)
     temple (0.8.2)
     thor (1.0.1)
@@ -293,6 +296,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.4, >= 5.2.4.3)
   rspec-rails (~> 3.6.0)
+  rubocop
   sass-rails (~> 5.0)
   selenium-webdriver
   sgcop!
@@ -300,6 +304,7 @@ DEPENDENCIES
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
   sqlite3
+  standard
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
